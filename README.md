@@ -1,4 +1,4 @@
-# Ruby on Rails Tutorial sample application
+# Ruby on Rails Tutorial
 
 ## Reference implementation
 
@@ -62,6 +62,15 @@ If the test suite passes, you’ll be ready to seed the database with sample use
 $ rails db:seed
 $ rails server
 ```
+
+### Useful commands:
+
+- `eval "$(rbenv init - zsh)"`
+- `rbenv install << version | 2.7.5 >>` -> install specific version
+- `rbenv global << version | 2.7.5 >>` -> set this version as global
+- `gem install bundler:2.2.31` -> install Bundler's specific version
+- `bundle _2.2.31_ install` -> install all gems under 2.2.31 Bundler
+- `bundle config build.pg --with-pg-config=/Applications/Postgres.app/Contents/Versions/13/bin/pg_config` -> fix PG error on `install`
 
 Follow the instructions in [Section 1.2.2 `rails server`](https://www.railstutorial.org/book#sec-rails_server) to view the app. You can then register a new user or log in as the sample administrative user with the email `example@railstutorial.org` and password `foobar`.
 
