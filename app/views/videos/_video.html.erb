@@ -1,0 +1,15 @@
+<li id="video-<%= video.id %>">
+  <%= link_to gravatar_for(video.user, size: 50), video.user %>
+  <span class="user"><%= link_to video.user.name, video.user %></span>
+  <span class="content">
+    <%= video.content %>
+    <%= video_tag rails_blob_url(video), size: "150x120", controls: true %>
+  </span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(video.created_at) %> ago.
+    <% if current_user?(video.user) %>
+      <%= link_to "delete", video, method: :delete,
+                                       data: { confirm: "You sure?" } %>
+    <% end %>
+  </span>
+</li>
