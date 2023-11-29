@@ -2,8 +2,10 @@
   <%= link_to gravatar_for(video.user, size: 50), video.user %>
   <span class="user"><%= link_to video.user.name, video.user %></span>
   <span class="content">
-    <%= video.content %>
-
+    <a href="<%= video_path(video) %>">
+      <p class="title"><%= video.title %></p>
+      <p class="description" style="color:grey"><%= video.content %></p>
+    </a>
     <% if video.video.attached? %>
       <div class="video">
           <%= video_tag url_for(video.video), size: "250x220", controls: true %>

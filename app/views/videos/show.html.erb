@@ -1,0 +1,30 @@
+<% provide(:title, @video.title) %>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="row">
+      <%= link_to "back", videos_path %>
+
+      <h3 class="center"><%= @video.title %></h3>
+    </div>
+    <div class="col-md-6">
+      <section class="video">
+        <div class="video">
+            <%= video_tag url_for(@video.video), controls: true %>
+        </div>
+        <span class="description" style="color:grey"><%= @video.content %></span>
+      </section>
+    </div>
+    <div class="col-md-6">
+      <section class="notes">
+        <h4>My Notes</h4>
+
+        <% if @video.notes(current_user).empty? %>
+          <p>There are no notes for this video.</p>
+        <% else %>
+          <%= render partial: "video_notes" %>
+        <% end %>
+      </section>
+    </div>
+  </div>
+</div>

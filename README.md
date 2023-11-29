@@ -128,3 +128,28 @@ $ git checkout sign-up
 Experience shows that comparing code with the reference app is often helpful for debugging errors and tracking down discrepancies. For additional assistance with any issues in the tutorial, please consult the [Rails Tutorial Help page](https://www.railstutorial.org/help).
 
 Suspected errors, typos, and bugs can be emailed to <support@learnenough.com>. All such reports are gratefully received, but please double-check with the [online version of the tutorial](https://www.railstutorial.org/book) and this reference app before submitting.
+
+// Q: Give description of all folders in the app directory and their purpose
+// A: app/assets: contains subdirectories for assets such as images, stylesheets, and JavaScript files.
+//    app/controllers: contains controllers that respond to requests from the browser.
+//    app/helpers: contains helper modules that can be used in views and controllers.
+//    app/models: contains models that represent the information in the application.
+//    app/views: contains view templates that are rendered by the controllers.
+//    config: contains configuration files for the Rails application and for its dependencies.
+//    db: contains the database schema in schema.rb and migrations that make changes to the database.
+//    doc: contains documentation for the application.
+//    lib: contains libraries of code written for the application.
+//    log: contains log files from the application.
+//    public: contains static files that are made publicly available by the web server.
+//    test: contains unit and integration tests for the application.
+//    tmp: contains temporary files.
+//    vendor: contains third-party code such as plugins and gems.
+//    Gemfile: specifies the Ruby gems used by the application.
+//    Gemfile.lock: records the specific versions of all gems installed on the system.
+//    README.md: contains a brief description of the application.
+//    Rakefile: specifies program tasks that can be run from the command line.
+//    config.ru: specifies settings used by the Rack web server interface.
+//    .gitignore: specifies files that should be ignored by Git.
+//    .ruby-version: specifies the Ruby version used by the application.
+//    package.json: specifies the JavaScript packages used by the application.
+//    yarn.lock: records the specific versions of all JavaScript packages installed on the system.

@@ -1,0 +1,13 @@
+<ul>
+  <% @video.notes(current_user).each do |note| %>
+    <li><%= note.note %></li>
+  <% end %>
+</ul>
+
+<%= form_for([@video.notes(current_user).build]) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+    <%= f.text_area :note, placeholder: "Add a note..." %>
+  </div>
+  <%= f.submit "Add note", class: "btn btn-primary" %>
+<% end %>

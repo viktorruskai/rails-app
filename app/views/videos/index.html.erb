@@ -1,0 +1,10 @@
+<% provide(:title, 'All videos') %>
+<h1>All videos</h1>
+
+<%= will_paginate %>
+
+<ul class="users">
+  <%= render @videos %>
+</ul>
+
+<%= will_paginate %>

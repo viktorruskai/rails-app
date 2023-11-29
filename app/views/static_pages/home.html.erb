@@ -1,29 +1,41 @@
 <% if logged_in? %>
-  <div class="row">
-    <aside class="col-md-4">
-      <section class="user_info">
-        <%= render 'shared/user_info' %>
-      </section>
-      <section class="stats">
-        <%= render 'shared/stats' %>
-      </section>
-      <section class="video_form">
-        <%= render 'shared/video_form' %>
-      </section>
-    </aside>
-    <div class="col-md-8">
-      <h3>Video Feed</h3>
-      <%= render 'shared/feed' %>
-    </div>
+  <% if is_admin? %>
+    <div class="row">
+      <aside class="col-md-4">
+        <section class="user_info">
+          <%= render 'shared/user_info' %>
+        </section>
+        <section class="stats">
+          <%= render 'shared/stats' %>
+        </section>
+        <section class="video_form">
+          <%= render 'shared/video_form' %>
+        </section>
+      </aside>
+      <div class="col-md-8">
+        <h3>My Video Feed</h3>
+        <%= render 'shared/feed' %>
+      </div>
+    <% else %>
+      <div class="row">
+        <aside class="col-md-4">
+
+        </aside>
+        <div class="col-md-8">
+          <h3>Student info</h3>
+          <p>
+            Go to the <%= link_to "videos", videos_path %> page to view all videos.
+          </p>
+        </div>
+      </div>
+    <% end %>
   </div>
 <% else %>
   <div class="center jumbotron">
-    <h1>Welcome to the Sample App</h1>
+    <h1>Welcome to the e-learning platform.</h1>
 
     <h2>
-      This is the home page for the
-      <a href="https://www.railstutorial.org/">Ruby on Rails Tutorial</a>
-      sample application.
+      This is the home page for the sample application.
     </h2>
 
     <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
