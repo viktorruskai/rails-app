@@ -28,11 +28,7 @@ class VideosController < ApplicationController
   def destroy
     @video.destroy
     flash[:success] = "Video was successfully deleted."
-#     if request.referrer.nil? || request.referrer == videos_url
-      redirect_to root_url
-#     else
-#       redirect_to request.referrer
-#     end
+    redirect_to root_url
   end
 
   private
