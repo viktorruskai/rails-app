@@ -21,9 +21,9 @@
 
         <% if @video.notes(current_user).empty? %>
           <p>There are no notes for this video.</p>
-        <% else %>
-          <%= render partial: "video_notes" %>
         <% end %>
+
+        <%= render partial: "video_notes" %>
       </section>
     </div>
   </div>
