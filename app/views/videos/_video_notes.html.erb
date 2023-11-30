@@ -1,11 +1,14 @@
 <ul>
   <% @video.notes(current_user).each do |note| %>
-    <li><%= note.note %></li>
+    <li><%= note.note %> <%= link_to "delete", note, method: :delete, data: { confirm: "You sure?" } %> </li>
   <% end %>
 </ul>
 
 <%= form_for([@video.notes(current_user).build]) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.hidden_field :video_id, value: @video.id %>
+
   <div class="field">
     <%= f.text_area :note, placeholder: "Add a note..." %>
   </div>

@@ -6,7 +6,7 @@ class VideoNotesController < ApplicationController
 
   # save new video note
   def create
-    @video = Video.find(params[:id])
+    @video = Video.find(video_note_params[:video_id])
     @video_note = @video.video_notes.build(video_note_params)
     @video_note.user = current_user
     if @video_note.save
@@ -20,8 +20,7 @@ class VideoNotesController < ApplicationController
 
   # delete a video note
   def destroy
-    @video = Video.find(params[:video_id])
-    @video_note = @video.video_notes.find(video_note_params[:id])
+    @video_note = VideoNote.find(params[:id])
     # check if note belongs to current user
     if @video_note.user != current_user
       flash[:error] = "You are not authorized to delete this note."
@@ -31,13 +30,13 @@ class VideoNotesController < ApplicationController
 
     @video_note.destroy
     flash[:success] = "Note was successfully deleted."
-    redirect_to @video
+    redirect_back(fallback_location: root_path)
   end
 
   private
 
   def video_note_params
-    params.require(:video_note).permit(:note)
+    params.require(:video_note).permit(:video_id, :note)
   end
 
   def video_params
