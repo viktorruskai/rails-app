@@ -8,7 +8,7 @@ class Video < ApplicationRecord
   validates :user_id, presence: true
   validates :title, presence: true, length: { maximum: 100 }
   validates :content, presence: true, length: { maximum: 240 }
-  validates :video,   content_type: { in: %w[video/mp4 video/quicktime],
+  validates :video, content_type: { in: %w[video/mp4 video/quicktime],
                                       message: "must be a valid video format" },
                       size: { less_than: 5.megabytes,
                               message:   "should be less than 5MB" }
