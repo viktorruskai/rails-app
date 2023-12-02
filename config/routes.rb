@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root   'static_pages#home'
+
   get    '/help',    to: 'static_pages#help'
   get    '/about',   to: 'static_pages#about'
   get    '/contact', to: 'static_pages#contact'
@@ -11,8 +12,6 @@ Rails.application.routes.draw do
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
-#   resources :videos,          only: [:create, :destroy]
   resources :videos
   resources :video_notes, only: [:create, :edit, :update, :destroy]
-#   get '/videos', to: 'static_pages#home'
 end

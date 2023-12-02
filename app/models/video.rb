@@ -13,6 +13,7 @@ class Video < ApplicationRecord
                       size: { less_than: 5.megabytes,
                               message:   "should be less than 5MB" }
 
+  # Returns notes for a video.
   def notes(user)
     video_notes.where(user_id: user.id)
   end

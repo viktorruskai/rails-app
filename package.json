@@ -1,5 +1,5 @@
 {
-  "name": "sample_app",
+  "name": "elearning_platform",
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",

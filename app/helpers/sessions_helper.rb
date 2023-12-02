@@ -4,7 +4,7 @@ module SessionsHelper
   def log_in(user)
     session[:user_id] = user.id
     # Guard against session replay attacks.
-    # See https://bit.ly/33UvK0w for more.
+    # See https://bit.ly/33UvK0w .
     session[:session_token] = user.session_token
   end
 
