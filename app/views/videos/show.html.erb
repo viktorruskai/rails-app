@@ -10,7 +10,9 @@
     <div class="col-md-6">
       <section class="video">
         <div class="video">
+           <% if @video.video.attached? %>
             <%= video_tag url_for(@video.video), controls: true, id: "video-player" %>
+          <% end %>
         </div>
         <span class="description" style="color:grey"><%= @video.content %></span>
       </section>

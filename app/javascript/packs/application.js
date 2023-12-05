@@ -15,7 +15,7 @@ Turbolinks.start()
 ActiveStorage.start()
 
 
-$(document).ready(function () {
+$(document).on('turbolinks:load', function () {
     $('.note').each(function () {
         // Extract time from the text content of the note
         let noteText = $(this).html();
