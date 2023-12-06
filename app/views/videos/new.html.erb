@@ -1,15 +1,19 @@
+<% provide(:title, 'Add a new video') %>
+<h1>New video</h1>
+
+
 <%= form_with(model: @video, local: true) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
-      <%= f.text_field :title, placeholder: "Title ..." %>
+      <%= f.text_field :title, placeholder: "Title" %>
     </div>
   <div class="field">
-    <%= f.text_area :content, placeholder: "Compose new video ..." %>
+    <%= f.text_area :content, placeholder: "Description" %>
   </div>
   <span class="video">
-      <%= f.file_field :video, accept: "video/mp4,video/quicktime" %>
+      <%= f.file_field :video, required: true, accept: "video/mp4,video/quicktime" %>
     </span>
-  <%= f.submit "Post", class: "btn btn-primary" %>
+  <%= f.submit "Add", class: "btn btn-primary" %>
 <% end %>
 
 <script type="text/javascript">
@@ -21,3 +25,4 @@
     }
   });
 </script>
+

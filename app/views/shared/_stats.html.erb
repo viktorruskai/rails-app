@@ -1,7 +1,6 @@
 <% @user ||= current_user %>
-<div class="stats">
-    <strong id="videos" class="stat">
-    <%= @user.videos.count %>
-    </strong>
-    videos
-</div>
+<% if @user.admin? %>
+  <div class="stats">
+      <strong><%= @user.videos.count %></strong> <%= pluralize_without_count(@user.videos.count, "Video") %>
+  </div>
+<% end %>

@@ -12,12 +12,18 @@
     </section>
   </aside>
   <div class="col-md-8">
-    <% if @user.videos.any? %>
-      <h3>videos (<%= @user.videos.count %>)</h3>
-      <ol class="videos">
-        <%= render @videos %>
-      </ol>
-      <%= will_paginate @videos %>
+    <% if @user.admin? %>
+      <% if @user.videos.any? %>
+        <h3><%= pluralize(@user.videos.count, "Video") %></h3>
+        <ol class="videos">
+          <%= render @videos %>
+        </ol>
+        <%= will_paginate @videos %>
+      <% else %>
+        <h3>No videos yet</h3>
+      <% end %>
+    <% else %>
+      <h3>Student user</h3>
     <% end %>
   </div>
 </div>
