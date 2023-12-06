@@ -3,19 +3,23 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: :destroy
 
+  # List all users.
   def index
     @users = User.paginate(page: params[:page])
   end
 
+  # Show user profile.
   def show
     @user = User.find(params[:id])
     @videos = @user.videos.paginate(page: params[:page])
   end
 
+  # Create a new user empty model.
   def new
     @user = User.new
   end
 
+  # Create a new user (Student) with params.
   def create
     @user = User.new(user_params)
     if @user.save
@@ -27,10 +31,12 @@ class UsersController < ApplicationController
     end
   end
 
+  # Edit user profile.
   def edit
     @user = User.find(params[:id])
   end
 
+  # Update user profile.
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
@@ -41,6 +47,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # Delete user.
   def destroy
     User.find(params[:id]).destroy
     flash[:success] = "User deleted"
@@ -49,6 +56,7 @@ class UsersController < ApplicationController
 
   private
 
+    # Params for user.
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end

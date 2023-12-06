@@ -7,6 +7,7 @@ class VideosController < ApplicationController
      @videos = Video.paginate(page: params[:page])
   end
 
+  # Show a video.
   def show
     @video = Video.find(params[:id])
   end
@@ -33,10 +34,12 @@ class VideosController < ApplicationController
 
   private
 
+  # Params for video.
   def video_params
     params.require(:video).permit(:title, :content, :video)
   end
 
+  # Confirms the correct user.
   def correct_user
     @video = current_user.videos.find_by(id: params[:id])
     redirect_to root_url if @video.nil?

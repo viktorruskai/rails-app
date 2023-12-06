@@ -45,6 +45,7 @@ class VideoNotesController < ApplicationController
 
   private
 
+  # Find a video note.
   def find_note
     @video_note = VideoNote.find(params[:id])
 
@@ -56,10 +57,12 @@ class VideoNotesController < ApplicationController
     end
   end
 
+  # Params for video note.
   def video_note_params
     params.require(:video_note).permit(:video_id, :note)
   end
 
+  # Params for video.
   def video_params
     params.require(:video).permit(:title, :content, :video)
   end

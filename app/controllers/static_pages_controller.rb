@@ -1,5 +1,6 @@
 class StaticPagesController < ApplicationController
 
+  # Home page.
   def home
     if logged_in?
       @video  = current_user.videos.build
