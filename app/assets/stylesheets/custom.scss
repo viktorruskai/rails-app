@@ -4,6 +4,15 @@
 /* mixins, variables, etc. */
 
 $gray-medium-light: #eaeaea;
+$spacer: 10px;
+
+.mb-4 {
+  margin-bottom: ($spacer * 1) !important;
+}
+
+.mb-5 {
+  margin-bottom: ($spacer * 2) !important;
+}
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -198,10 +207,6 @@ aside {
   }
 }
 
-.users.follow {
-  padding: 0;
-}
-
 /* forms */
 
 input, textarea, select, .uneditable-input {
@@ -249,6 +254,8 @@ input {
 .users {
   list-style: none;
   margin: 0;
+  padding-left: 0;
+
   li {
     overflow: auto;
     padding: 10px 0;

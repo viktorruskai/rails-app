@@ -1,35 +1,44 @@
 <% provide(:title, @video.title) %>
 
 <div class="row">
-  <div class="col-md-12">
-    <div class="row">
-      <%= link_to "back", videos_path %>
+  <article>
+    <header class="mb-4">
+      <h1 class="text-bold mb-1"><%= @video.title %></h1>
 
-      <h3 class="center"><%= @video.title %></h3>
-    </div>
-    <div class="col-md-6">
-      <section class="video">
-        <% if @video.user == current_user %>
-          <%= link_to "edit", edit_video_path(@video) %> | <%= link_to "delete", @video, method: :delete, data: { confirm: "You sure?" } %>
+      <div class="text-muted mb-5">
+        Posted <%= time_ago_in_words(@video.created_at) %> ago by <span class="text-decoration-underline"><%= @video.user.name %></span>.
+
+        <% if current_user?(@video.user) %>
+          <%= link_to "Edit", edit_video_path(@video) %> | <%= link_to "Delete", @video, method: :delete, data: { confirm: "You sure?" } %>
         <% end %>
-        <div class="video">
-           <% if @video.video.attached? %>
-            <%= video_tag url_for(@video.video), controls: true, id: "video-player" %>
-          <% end %>
+      </div>
+    </header>
+
+    <figure class="mb-4">
+      <div class="row">
+        <div class="col-lg-8">
+          <section class="videos">
+            <% if @video.video.attached? %>
+              <%= video_tag url_for(@video.video), width: "720", controls: true, id: "video-player" %>
+            <% end %>
+          </section>
         </div>
-        <span class="description" style="color:grey"><%= @video.content %></span>
-      </section>
-    </div>
-    <div class="col-md-6">
-      <section class="notes">
-        <h4>My Notes</h4>
+        <div class="col-lg-4">
+          <section class="notes">
+            <h4>My Notes</h4>
 
-        <% if @video.notes(current_user).empty? %>
-          <p>You have no notes for this video.</p>
-        <% end %>
+            <% if @video.notes(current_user).empty? %>
+              <p>You have no notes for this video.</p>
+            <% end %>
 
-        <%= render partial: "video_notes" %>
-      </section>
-    </div>
-  </div>
+            <%= render partial: "video_notes" %>
+          </section>
+          </div>
+        </div>
+    </figure>
+
+    <section class="mb-4">
+        <%= @video.content %>
+    </section>
+  </article>
 </div>

@@ -1,21 +1,13 @@
-<li id="video-<%= video.id %>">
-  <%= link_to gravatar_for(video.user, size: 50), video.user %>
-  <span class="user"><%= link_to video.user.name, video.user %></span>
-  <span class="content">
+<li class="card mb-4" id="video-<%= video.id %>">
     <a href="<%= video_path(video) %>">
-      <p class="title"><%= video.title %></p>
-      <p class="description" style="color:grey"><%= video.content %></p>
+      <% if video.video.attached? %>
+        <%= video_tag url_for(video.video), size: "700x335", controls: false %>
+      <% end %>
     </a>
-    <% if video.video.attached? %>
-      <div class="video">
-          <%= video_tag url_for(video.video), size: "250x220", controls: true %>
-      </div>
-    <% end %>
-  </span>
-  <span class="timestamp">
-    Posted <%= time_ago_in_words(video.created_at) %> ago.
-    <% if current_user?(video.user) %>
-      <%= link_to "edit", edit_video_path(video) %> | <%= link_to "delete", video, method: :delete, data: { confirm: "You sure?" } %>
-    <% end %>
-  </span>
+    <div class="card-body">
+        <div class="small text-muted">Posted <%= time_ago_in_words(video.created_at) %> ago by <%= video.user.name %>.</div>
+        <h4 class="card-title h4"><%= video.title %></h4>
+        <p class="card-text"><%= video.content.truncate(100) %></p>
+        <a class="btn btn-primary" href="<%= video_path(video) %>">See more →</a>
+    </div>
 </li>

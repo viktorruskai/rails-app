@@ -1,6 +1,6 @@
 <ul>
   <% @video.notes(current_user).each do |note| %>
-    <li class="note"><%= note.note %> <%= link_to "edit", edit_video_note_path(note) %> | <%= link_to "delete", note, method: :delete, data: { confirm: "You sure?" } %> </li>
+    <li class="note"><%= note.note %> <%= link_to "Edit", edit_video_note_path(note) %> | <%= link_to "Delete", note, method: :delete, data: { confirm: "You sure?" } %> </li>
   <% end %>
 </ul>
 
