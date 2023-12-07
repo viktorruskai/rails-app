@@ -10,7 +10,7 @@ class Video < ApplicationRecord
   validates :content, presence: true, length: { maximum: 240 }
   validates :video, content_type: { in: %w[video/mp4 video/quicktime], message: "must be a valid video format" },
                     presence: true,
-                    size: { less_than: 5.megabytes, message: "should be less than 5MB" }
+                    size: { less_than: 500.megabytes, message: "should be less than 500MB" }
 
   # Returns notes for a video.
   def notes(user)
