@@ -42,20 +42,35 @@ $(document).on('turbolinks:load', function () {
 
     // Handle click event on the generated links
     $('.video-link').on('click', function (e) {
+        let hours, minutes, seconds;
+
         e.preventDefault();
         // Get the time from the data-time attribute of the clicked link
         let time = $(this).data('time');
-        // Split minutes and seconds
-        let [minutes, seconds] = time.split(':');
+        // Split the time into parts
+        let parts = time.split(':');
+
+        // If the time is in MM:SS format, add 0 hours
+        if (parts.length === 2) {
+            hours = 0;
+            minutes = parts[0];
+            seconds = parts[1];
+        } else if (parts.length === 3) {
+            hours = parts[0];
+            minutes = parts[1];
+            seconds = parts[2];
+        } else {
+            return;
+        }
 
         // Convert to seconds and set the current time of the video
-        $('#video-player')[0].currentTime = parseInt(minutes) * 60 + parseInt(seconds);
+        $('#video-player')[0].currentTime = parseInt(hours) * 3600 + parseInt(minutes) * 60 + parseInt(seconds);
     });
 
     // Function to extract time from note text
     function extractTime(text) {
-        // Regular expression to match MM:SS format
-        const regex = /(\d{2}):(\d{2})/;
+        // Regular expression to match HH:MM:SS format, but HH is optional
+        const regex = /(\d{2}:)?(\d{2}):(\d{2})/;
         let match = text.match(regex);
 
         return match ? match[0] : '-';
