@@ -1,6 +1,10 @@
 module UsersHelper
 
   # Returns the Gravatar for the given user.
+  #
+  # Params:
+  # - `user` - The user to get the Gravatar for.
+  # - `options` - The options to use for the Gravatar.
   def gravatar_for(user, options = { size: 80 })
     size = options[:size]
     gravatar_id = Digest::MD5::hexdigest(user.email.downcase)

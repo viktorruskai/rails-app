@@ -88,6 +88,37 @@
 
   <section class="description">
     
+<p>This model represents a video uploaded by a user. It belongs to a user and has many video notes. It validates the presence of user_id, title, content, and video. It also validates the length of title and content, and the content type and size of the video. It includes methods for returning notes for a video and displaying a resized video.</p>
+
+<p>Associations:</p>
+<ul><li>
+<p>belongs_to :user: Each video is associated with a user.</p>
+</li><li>
+<p>has_many :video_notes, dependent: :destroy: Each video can have many notes. If the video is destroyed, its notes are also destroyed.</p>
+</li><li>
+<p>has_one_attached :video: Each video has one attached video file.</p>
+</li></ul>
+
+<p>Validations:</p>
+<ul><li>
+<p>‘user_id`: Ensures the presence of user_id.</p>
+</li><li>
+<p>‘title`: Ensures the presence of title and its length is maximum 100 characters.</p>
+</li><li>
+<p>‘content`: Ensures the presence of content and its length is maximum 240 characters.</p>
+</li><li>
+<p>‘video`: Ensures the presence of video, its content type is either video/mp4 or video/quicktime, and its size is less than 500MB.</p>
+</li></ul>
+
+<p>Methods:</p>
+<ul><li>
+<p>notes(user): Returns notes for a video made by a specific user.</p>
+</li><li>
+<p><a href="Video.html#method-i-display_image"><code>display_image</code></a>: Returns a resized image for display.</p>
+</li><li>
+<p><a href="Video.html#method-i-display_video"><code>display_video</code></a>: Returns a resized video for display.</p>
+</li></ul>
+
   </section>
 
   <section id="5Buntitled-5D" class="documentation-section">
@@ -114,7 +145,7 @@
           <p>Returns a resized image for display.</p>
 
           <div class="method-source-code" id="display_image-source">
-            <pre><span class="ruby-comment"># File app/models/video.rb, line 21</span>
+            <pre><span class="ruby-comment"># File app/models/video.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">display_image</span>
   <span class="ruby-identifier">image</span>.<span class="ruby-identifier">variant</span>(<span class="ruby-value">resize_to_limit:</span> [<span class="ruby-value">500</span>, <span class="ruby-value">500</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -137,7 +168,7 @@
           <p>Returns a resized image for display.</p>
 
           <div class="method-source-code" id="display_video-source">
-            <pre><span class="ruby-comment"># File app/models/video.rb, line 26</span>
+            <pre><span class="ruby-comment"># File app/models/video.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">display_video</span>
   <span class="ruby-identifier">video</span>.<span class="ruby-identifier">variant</span>(<span class="ruby-value">resize_to_limit:</span> [<span class="ruby-value">500</span>, <span class="ruby-value">500</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -159,8 +190,13 @@
         <div class="method-description">
           <p>Returns notes for a video.</p>
 
+<p>Params:</p>
+<ul><li>
+<p>‘user` - The user to get notes for.</p>
+</li></ul>
+
           <div class="method-source-code" id="notes-source">
-            <pre><span class="ruby-comment"># File app/models/video.rb, line 16</span>
+            <pre><span class="ruby-comment"># File app/models/video.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">notes</span>(<span class="ruby-identifier">user</span>)
   <span class="ruby-identifier">video_notes</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">user_id:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>)
 <span class="ruby-keyword">end</span></pre>

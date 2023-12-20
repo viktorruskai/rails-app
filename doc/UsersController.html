@@ -94,6 +94,38 @@
 
   <section class="description">
     
+<p>This controller handles the operations for users. It includes actions for listing, showing, creating, editing, updating, and deleting users. Only logged in users can perform these actions. The correct user or an admin user is confirmed before editing or updating a user. Only admin users can list, show, and delete users.</p>
+
+<p>Actions:</p>
+<ul><li>
+<p>‘index`: Lists all users with pagination, ordered by admin status and name.</p>
+</li><li>
+<p>‘show`: Displays a specific user’s profile based on the provided ID.</p>
+</li><li>
+<p>‘new`: Initializes a new user instance.</p>
+</li><li>
+<p>‘new_admin`: Initializes a new admin user instance.</p>
+</li><li>
+<p>‘create`: Creates a new user with the provided parameters.</p>
+</li><li>
+<p>‘create_admin`: Creates a new admin user with the provided parameters.</p>
+</li><li>
+<p>‘edit`: Finds a specific user based on the provided ID for editing.</p>
+</li><li>
+<p>‘update`: Updates a specific user based on the provided ID and parameters.</p>
+</li><li>
+<p>‘destroy`: Deletes a specific user based on the provided ID.</p>
+</li></ul>
+
+<p>Private methods:</p>
+<ul><li>
+<p>‘user_params`: Strong parameters for creating and updating a user.</p>
+</li><li>
+<p>‘correct_user`: Confirms the correct user before allowing certain actions.</p>
+</li><li>
+<p>‘admin_user`: Confirms the user is an admin before allowing certain actions.</p>
+</li></ul>
+
   </section>
 
   <section id="5Buntitled-5D" class="documentation-section">
@@ -119,8 +151,19 @@
         <div class="method-description">
           <p>Create a new user (Student) with params.</p>
 
+<p>Post Params:</p>
+<ul><li>
+<p>‘name` - The name of the user.</p>
+</li><li>
+<p>‘email` - The email of the user.</p>
+</li><li>
+<p>‘password` - The password of the user.</p>
+</li><li>
+<p>‘password_confirmation` - The password confirmation of the user.</p>
+</li></ul>
+
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 28</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">user_params</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">save</span>
@@ -149,8 +192,19 @@
         <div class="method-description">
           <p>Create a new user (Teacher / Administrator) with params.</p>
 
+<p>Post Params:</p>
+<ul><li>
+<p>‘name` - The name of the user.</p>
+</li><li>
+<p>‘email` - The email of the user.</p>
+</li><li>
+<p>‘password` - The password of the user.</p>
+</li><li>
+<p>‘password_confirmation` - The password confirmation of the user.</p>
+</li></ul>
+
           <div class="method-source-code" id="create_admin-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 40</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 80</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_admin</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">user_params</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">save</span>
@@ -180,8 +234,13 @@
         <div class="method-description">
           <p>Delete user.</p>
 
+<p>URL Params:</p>
+<ul><li>
+<p>‘id` - The id of the user to delete.</p>
+</li></ul>
+
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 69</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 123</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">destroy</span>
   <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]).<span class="ruby-identifier">destroy</span>
   <span class="ruby-identifier">flash</span>[<span class="ruby-value">:success</span>] = <span class="ruby-string">&quot;User deleted&quot;</span>
@@ -205,8 +264,13 @@
         <div class="method-description">
           <p>Edit user profile.</p>
 
+<p>URL Params:</p>
+<ul><li>
+<p>‘id` - The id of the user to edit.</p>
+</li></ul>
+
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 53</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 96</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">edit</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -228,8 +292,13 @@
         <div class="method-description">
           <p>List all users</p>
 
+<p>URL Params:</p>
+<ul><li>
+<p>‘page` (optional) - The page of users to show.</p>
+</li></ul>
+
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 7</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index</span>
   <span class="ruby-ivar">@users</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">order</span>(<span class="ruby-value">admin:</span> <span class="ruby-value">:desc</span>, <span class="ruby-value">name:</span> <span class="ruby-value">:asc</span>).<span class="ruby-identifier">paginate</span>(<span class="ruby-value">page:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -252,7 +321,7 @@
           <p>Create a new user empty model.</p>
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 18</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 46</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">new</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
@@ -275,7 +344,7 @@
           <p>Create a new user (Teacher / Administrator) empty model.</p>
 
           <div class="method-source-code" id="new_admin-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 23</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 51</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">new_admin</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
@@ -297,8 +366,15 @@
         <div class="method-description">
           <p>Show user profile.</p>
 
+<p>URL Params:</p>
+<ul><li>
+<p>‘id` - The id of the user to show.</p>
+</li><li>
+<p>‘page` (optional) - The page of users to show.</p>
+</li></ul>
+
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 12</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">show</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-ivar">@videos</span> = <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">videos</span>.<span class="ruby-identifier">paginate</span>(<span class="ruby-value">page:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>])
@@ -321,8 +397,24 @@
         <div class="method-description">
           <p>Update user profile.</p>
 
+<p>URL Params:</p>
+<ul><li>
+<p>‘id` - The id of the user to update.</p>
+</li></ul>
+
+<p>Post Params:</p>
+<ul><li>
+<p>‘name` - The name of the user.</p>
+</li><li>
+<p>‘email` - The email of the user.</p>
+</li><li>
+<p>‘password` - The password of the user.</p>
+</li><li>
+<p>‘password_confirmation` - The password confirmation of the user.</p>
+</li></ul>
+
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 58</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 109</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">user_params</span>)

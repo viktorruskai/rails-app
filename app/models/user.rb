@@ -1,3 +1,30 @@
+# This model represents a user in the application.
+# It has many videos, with the videos being destroyed if the user is destroyed.
+# It validates the presence and length of name and email, as well as the format and uniqueness of email.
+# It also has secure password features, which validates the presence and length of password on creation.
+# It also includes methods for remembering, forgetting, and authenticating users, as well as account activation and password reset.
+#
+# Associations:
+# - has_many :videos, dependent: :destroy: Each user can have many videos. If the user is destroyed, its videos are also destroyed.
+#
+# Validations:
+# - `name`: Ensures the presence of name and its length is maximum 50 characters.
+# - `email`: Ensures the presence of email, its length is maximum 255 characters, its format matches VALID_EMAIL_REGEX, and it is unique (case insensitive).
+# - `password`: Ensures the presence of password on creation and its length is minimum 6 characters.
+#
+# Methods:
+# - User.digest(string): Returns the hash digest of the given string.
+# - User.new_token: Returns a random token.
+# - remember: Remembers a user in the database for use in persistent sessions.
+# - session_token: Returns a session token to prevent session hijacking.
+# - authenticated?(attribute, token): Returns true if the given token matches the digest.
+# - forget: Forgets a user.
+# - activate: Activates an account.
+# - send_activation_email: Sends activation email.
+# - create_reset_digest: Sets the password reset attributes.
+# - send_password_reset_email: Sends password reset email.
+# - password_reset_expired?: Returns true if a password reset has expired.
+# - feed: Returns a user's status feed.
 class User < ApplicationRecord
   has_many :videos, dependent: :destroy
 

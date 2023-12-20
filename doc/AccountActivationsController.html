@@ -86,6 +86,8 @@
 
   <section class="description">
     
+<p>This controller handles the operations for account activations. It includes an action for editing (activating) account activations.</p>
+
   </section>
 
   <section id="5Buntitled-5D" class="documentation-section">
@@ -109,10 +111,17 @@
         </div>
 
         <div class="method-description">
-          <p>Activate user account.</p>
+          <p>Activate user account. Activates a user account based on the provided email and activation token. If the user exists, is not activated, and the activation token is authenticated, it activates the user, logs in the user, and redirects to the user’s profile. If the user does not exist, is already activated, or the activation token is not authenticated, it redirects to the root URL.</p>
+
+<p>URL Params:</p>
+<ul><li>
+<p>‘id` - The activation token.</p>
+</li><li>
+<p>‘email` - The email of the user to activate.</p>
+</li></ul>
 
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/account_activations_controller.rb, line 4</span>
+            <pre><span class="ruby-comment"># File app/controllers/account_activations_controller.rb, line 12</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">edit</span>
   <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-value">email:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:email</span>])
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">user</span>.<span class="ruby-identifier">activated?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">authenticated?</span>(<span class="ruby-value">:activation</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])

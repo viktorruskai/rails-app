@@ -89,6 +89,28 @@
 
   <section class="description">
     
+<p>This controller handles the operations for video notes. It includes actions for creating, reading, updating, and deleting video notes. Only logged in users can perform these actions. The correct user is confirmed before editing, updating, or deleting a video note.</p>
+
+<p>Actions:</p>
+<ul><li>
+<p>‘create`: Creates a new video note with the provided parameters.</p>
+</li><li>
+<p>‘edit`: Finds a specific video note based on the provided ID for editing.</p>
+</li><li>
+<p>‘update`: Updates a specific video note based on the provided ID and parameters.</p>
+</li><li>
+<p>‘destroy`: Deletes a specific video note based on the provided ID.</p>
+</li></ul>
+
+<p>Private methods:</p>
+<ul><li>
+<p>‘find_note`: Finds a specific video note based on the provided ID.</p>
+</li><li>
+<p>‘video_note_params`: Strong parameters for creating and updating a video note.</p>
+</li><li>
+<p>‘video_params`: Strong parameters for a video.</p>
+</li></ul>
+
   </section>
 
   <section id="5Buntitled-5D" class="documentation-section">
@@ -114,8 +136,15 @@
         <div class="method-description">
           <p>Save new video note.</p>
 
+<p>Post Params:</p>
+<ul><li>
+<p>‘video_id` - The id of the video to add the note to.</p>
+</li><li>
+<p>‘note` - The note to add to the video.</p>
+</li></ul>
+
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/video_notes_controller.rb, line 6</span>
+            <pre><span class="ruby-comment"># File app/controllers/video_notes_controller.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>
   <span class="ruby-ivar">@video</span> = <span class="ruby-constant">Video</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">video_note_params</span>[<span class="ruby-value">:video_id</span>])
   <span class="ruby-ivar">@video_note</span> = <span class="ruby-ivar">@video</span>.<span class="ruby-identifier">video_notes</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">video_note_params</span>)
@@ -147,8 +176,13 @@
         <div class="method-description">
           <p>Delete a video note.</p>
 
+<p>URL Params:</p>
+<ul><li>
+<p>‘id` - The id of the video note to delete.</p>
+</li></ul>
+
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/video_notes_controller.rb, line 43</span>
+            <pre><span class="ruby-comment"># File app/controllers/video_notes_controller.rb, line 74</span>
   <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">destroy</span>
     <span class="ruby-identifier">video</span> = <span class="ruby-ivar">@video_note</span>.<span class="ruby-identifier">video</span>
 
@@ -182,8 +216,13 @@
         <div class="method-description">
           <p>Edit a video note.</p>
 
+<p>URL Params:</p>
+<ul><li>
+<p>‘id` - The id of the video note to edit.</p>
+</li></ul>
+
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/video_notes_controller.rb, line 21</span>
+            <pre><span class="ruby-comment"># File app/controllers/video_notes_controller.rb, line 43</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">edit</span>
   <span class="ruby-ivar">@video_note</span> = <span class="ruby-constant">VideoNote</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -205,8 +244,20 @@
         <div class="method-description">
           <p>Update a video note.</p>
 
+<p>URL Params:</p>
+<ul><li>
+<p>‘id` - The id of the video note to update.</p>
+</li></ul>
+
+<p>Post Params:</p>
+<ul><li>
+<p>‘video_id` - The id of the video to add the note to.</p>
+</li><li>
+<p>‘note` - The note to update the video note with.</p>
+</li></ul>
+
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/video_notes_controller.rb, line 26</span>
+            <pre><span class="ruby-comment"># File app/controllers/video_notes_controller.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@video_note</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">video_note_params</span>)
   <span class="ruby-identifier">flash</span>[<span class="ruby-value">:success</span>] = <span class="ruby-string">&quot;Note was successfully updated. ----&quot;</span>

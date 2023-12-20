@@ -1,6 +1,9 @@
 module SessionsHelper
 
   # Logs in the given user.
+  #
+  # Params:
+  # - `user` - The user to log in.
   def log_in(user)
     session[:user_id] = user.id
     # Guard against session replay attacks.
@@ -9,6 +12,9 @@ module SessionsHelper
   end
 
   # Remembers a user in a persistent session.
+  #
+  # Params:
+  # - `user` - The user to remember.
   def remember(user)
     user.remember
     cookies.permanent.encrypted[:user_id] = user.id
@@ -32,6 +38,9 @@ module SessionsHelper
   end
 
   # Returns true if the given user is the current user.
+  #
+  # Params:
+  # - `user` - The user to check.
   def current_user?(user)
     user == current_user
   end
@@ -47,6 +56,9 @@ module SessionsHelper
   end
 
   # Forgets a persistent session.
+  #
+  # Params:
+  # - `user` - The user to forget.
   def forget(user)
     user.forget
     cookies.delete(:user_id)

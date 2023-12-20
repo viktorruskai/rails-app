@@ -1,8 +1,27 @@
+# This controller handles the operations for video notes.
+# It includes actions for creating, reading, updating, and deleting video notes.
+# Only logged in users can perform these actions.
+# The correct user is confirmed before editing, updating, or deleting a video note.
+#
+# Actions:
+# - `create`: Creates a new video note with the provided parameters.
+# - `edit`: Finds a specific video note based on the provided ID for editing.
+# - `update`: Updates a specific video note based on the provided ID and parameters.
+# - `destroy`: Deletes a specific video note based on the provided ID.
+#
+# Private methods:
+# - `find_note`: Finds a specific video note based on the provided ID.
+# - `video_note_params`: Strong parameters for creating and updating a video note.
+# - `video_params`: Strong parameters for a video.
 class VideoNotesController < ApplicationController
   before_action :logged_in_user, only: [:create, :edit, :update, :destroy]
   before_action :find_note, only: [:edit, :update, :destroy]
 
   # Save new video note.
+  #
+  # Post Params:
+  # - `video_id` - The id of the video to add the note to.
+  # - `note` - The note to add to the video.
   def create
     @video = Video.find(video_note_params[:video_id])
     @video_note = @video.video_notes.build(video_note_params)
@@ -18,11 +37,20 @@ class VideoNotesController < ApplicationController
   end
 
   # Edit a video note.
+  #
+  # URL Params:
+  # - `id` - The id of the video note to edit.
   def edit
     @video_note = VideoNote.find(params[:id])
   end
 
-   # Update a video note.
+  # Update a video note.
+  #
+  # URL Params:
+  # - `id` - The id of the video note to update.
+  # Post Params:
+  # - `video_id` - The id of the video to add the note to.
+  # - `note` - The note to update the video note with.
   def update
     if @video_note.update(video_note_params)
     flash[:success] = "Note was successfully updated. ----"
@@ -40,6 +68,9 @@ class VideoNotesController < ApplicationController
   end
 
   # Delete a video note.
+  #
+  # URL Params:
+  # - `id` - The id of the video note to delete.
   def destroy
     video = @video_note.video
 

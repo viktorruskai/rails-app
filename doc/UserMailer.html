@@ -87,6 +87,15 @@
 
   <section class="description">
     
+<p>This mailer handles the email operations for users. It includes methods for account activation and password reset emails.</p>
+
+<p>Methods:</p>
+<ul><li>
+<p><a href="UserMailer.html#method-i-account_activation"><code>account_activation</code></a>(user): Sends an account activation email to the user. The email includes a link to activate the account.</p>
+</li><li>
+<p><a href="UserMailer.html#method-i-password_reset"><code>password_reset</code></a>(user): Sends a password reset email to the user. The email includes a link to reset the password.</p>
+</li></ul>
+
   </section>
 
   <section id="5Buntitled-5D" class="documentation-section">
@@ -110,10 +119,15 @@
         </div>
 
         <div class="method-description">
-          
+          <p>Send account activation email.</p>
+
+<p>Params:</p>
+<ul><li>
+<p>‘user` - The user to send the email to.</p>
+</li></ul>
 
           <div class="method-source-code" id="account_activation-source">
-            <pre><span class="ruby-comment"># File app/mailers/user_mailer.rb, line 3</span>
+            <pre><span class="ruby-comment"># File app/mailers/user_mailer.rb, line 13</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">account_activation</span>(<span class="ruby-identifier">user</span>)
   <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">user</span>
   <span class="ruby-identifier">mail</span> <span class="ruby-value">to:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">email</span>, <span class="ruby-value">subject:</span> <span class="ruby-string">&quot;Account activation&quot;</span>
@@ -134,10 +148,15 @@
         </div>
 
         <div class="method-description">
-          
+          <p>Send password reset email.</p>
+
+<p>Params:</p>
+<ul><li>
+<p>‘user` - The user to send the email to.</p>
+</li></ul>
 
           <div class="method-source-code" id="password_reset-source">
-            <pre><span class="ruby-comment"># File app/mailers/user_mailer.rb, line 8</span>
+            <pre><span class="ruby-comment"># File app/mailers/user_mailer.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">password_reset</span>(<span class="ruby-identifier">user</span>)
   <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">user</span>
   <span class="ruby-identifier">mail</span> <span class="ruby-value">to:</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">email</span>, <span class="ruby-value">subject:</span> <span class="ruby-string">&quot;Password reset&quot;</span>

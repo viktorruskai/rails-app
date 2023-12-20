@@ -77,6 +77,24 @@
 
   <section class="description">
     
+<p>This model represents a note made by a user on a video. It belongs to a user and a video. It validates the presence of user_id, video_id, and note.</p>
+
+<p>Associations:</p>
+<ul><li>
+<p>belongs_to :user: Each video note is associated with a user.</p>
+</li><li>
+<p>belongs_to :video: Each video note is associated with a video.</p>
+</li></ul>
+
+<p>Validations:</p>
+<ul><li>
+<p>‘user_id`: Ensures the presence of `user_id`.</p>
+</li><li>
+<p>‘video_id`: Ensures the presence of `video_id`.</p>
+</li><li>
+<p>‘note`: Ensures the presence of note.</p>
+</li></ul>
+
   </section>
 
   <section id="5Buntitled-5D" class="documentation-section">

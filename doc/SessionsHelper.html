@@ -114,7 +114,7 @@
           <p>Returns the user corresponding to the remember token cookie.</p>
 
           <div class="method-source-code" id="current_user-source">
-            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 19</span>
+            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">current_user</span>
   <span class="ruby-keyword">if</span> (<span class="ruby-identifier">user_id</span> = <span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>])
     <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-value">id:</span> <span class="ruby-identifier">user_id</span>)
@@ -147,8 +147,13 @@
         <div class="method-description">
           <p>Returns true if the given user is the current user.</p>
 
+<p>Params:</p>
+<ul><li>
+<p>‘user` - The user to check.</p>
+</li></ul>
+
           <div class="method-source-code" id="current_user-3F-source">
-            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 35</span>
+            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">current_user?</span>(<span class="ruby-identifier">user</span>)
   <span class="ruby-identifier">user</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">current_user</span>
 <span class="ruby-keyword">end</span></pre>
@@ -170,8 +175,13 @@
         <div class="method-description">
           <p>Forgets a persistent session.</p>
 
+<p>Params:</p>
+<ul><li>
+<p>‘user` - The user to forget.</p>
+</li></ul>
+
           <div class="method-source-code" id="forget-source">
-            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 50</span>
+            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">forget</span>(<span class="ruby-identifier">user</span>)
   <span class="ruby-identifier">user</span>.<span class="ruby-identifier">forget</span>
   <span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:user_id</span>)
@@ -196,7 +206,7 @@
           <p>Returns true if the user is an admin, false otherwise.</p>
 
           <div class="method-source-code" id="is_admin-3F-source">
-            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 45</span>
+            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">is_admin?</span>
   <span class="ruby-identifier">logged_in?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">admin?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -218,8 +228,13 @@
         <div class="method-description">
           <p>Logs in the given user.</p>
 
+<p>Params:</p>
+<ul><li>
+<p>‘user` - The user to log in.</p>
+</li></ul>
+
           <div class="method-source-code" id="log_in-source">
-            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 4</span>
+            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 7</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">log_in</span>(<span class="ruby-identifier">user</span>)
   <span class="ruby-identifier">session</span>[<span class="ruby-value">:user_id</span>] = <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>
   <span class="ruby-comment"># Guard against session replay attacks.</span>
@@ -245,7 +260,7 @@
           <p>Logs out the current user.</p>
 
           <div class="method-source-code" id="log_out-source">
-            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 57</span>
+            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">log_out</span>
   <span class="ruby-identifier">forget</span>(<span class="ruby-identifier">current_user</span>)
   <span class="ruby-identifier">reset_session</span>
@@ -270,7 +285,7 @@
           <p>Returns true if the user is logged in, false otherwise.</p>
 
           <div class="method-source-code" id="logged_in-3F-source">
-            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 40</span>
+            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">logged_in?</span>
   <span class="ruby-operator">!</span><span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">nil?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -292,8 +307,13 @@
         <div class="method-description">
           <p>Remembers a user in a persistent session.</p>
 
+<p>Params:</p>
+<ul><li>
+<p>‘user` - The user to remember.</p>
+</li></ul>
+
           <div class="method-source-code" id="remember-source">
-            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 12</span>
+            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 18</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remember</span>(<span class="ruby-identifier">user</span>)
   <span class="ruby-identifier">user</span>.<span class="ruby-identifier">remember</span>
   <span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">permanent</span>.<span class="ruby-identifier">encrypted</span>[<span class="ruby-value">:user_id</span>] = <span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>
@@ -318,7 +338,7 @@
           <p>Stores the URL trying to be accessed.</p>
 
           <div class="method-source-code" id="store_location-source">
-            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 64</span>
+            <pre><span class="ruby-comment"># File app/helpers/sessions_helper.rb, line 76</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">store_location</span>
   <span class="ruby-identifier">session</span>[<span class="ruby-value">:forwarding_url</span>] = <span class="ruby-identifier">request</span>.<span class="ruby-identifier">original_url</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">get?</span>
 <span class="ruby-keyword">end</span></pre>

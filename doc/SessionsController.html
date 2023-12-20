@@ -88,6 +88,17 @@
 
   <section class="description">
     
+<p>This controller handles the operations for user sessions. It includes actions for creating and destroying sessions.</p>
+
+<p>Actions:</p>
+<ul><li>
+<p>‘new`: Renders the login form.</p>
+</li><li>
+<p>‘create`: Logs in a user with the provided email and password.</p>
+</li><li>
+<p>‘destroy`: Logs out the current user and redirects to the root URL.</p>
+</li></ul>
+
   </section>
 
   <section id="5Buntitled-5D" class="documentation-section">
@@ -111,10 +122,19 @@
         </div>
 
         <div class="method-description">
-          <p>Create a new session (Login).</p>
+          <p>Create a new session (Login). If the user is not activated, it redirects to the root URL and displays a warning message. If the login is successful, it redirects to the forwarding URL or the root URL.</p>
+
+<p>Post Params:</p>
+<ul><li>
+<p>‘email` - The email of the user to login.</p>
+</li><li>
+<p>‘password` - The password of the user to login.</p>
+</li><li>
+<p>‘remember_me` - Whether to remember the user.</p>
+</li></ul>
 
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 7</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>
   <span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-value">email:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:session</span>][<span class="ruby-value">:email</span>].<span class="ruby-identifier">downcase</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">authenticate</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:session</span>][<span class="ruby-value">:password</span>])
@@ -154,7 +174,7 @@
           <p>Destroy a session (Logout).</p>
 
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 29</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">destroy</span>
   <span class="ruby-identifier">log_out</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">logged_in?</span>
   <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_url</span>
@@ -175,10 +195,10 @@
         </div>
 
         <div class="method-description">
-          
+          <p>Render the login form.</p>
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 3</span>
+            <pre><span class="ruby-comment"># File app/controllers/sessions_controller.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">new</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
