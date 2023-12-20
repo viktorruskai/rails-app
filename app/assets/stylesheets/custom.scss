@@ -1,6 +1,16 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.turbo-progress-bar {
+  height: 15px;
+  background-color: gold;
+}
+
+turbo-frame {
+  display: block;
+  border: 1px solid blue;
+}
+
 /* mixins, variables, etc. */
 
 $gray-medium-light: #eaeaea;

@@ -4,18 +4,18 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
+import "@hotwired/turbo-rails"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "jquery"
 import "bootstrap"
 
 Rails.start()
-Turbolinks.start()
 ActiveStorage.start()
 
+window.Turbo.setProgressBarDelay(1);
 
-$(document).on('turbolinks:load', function () {
+$(document).on('turbo:load', function () {
     $('.note').each(function () {
         // Extract time from the text content of the note
         let noteText = $(this).html();
