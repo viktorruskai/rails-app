@@ -24,14 +24,14 @@
           </section>
         </div>
         <div class="col-lg-4">
-          <section class="notes">
+          <section class="notes" data-id="<%= dom_id(@video) %>">
             <h4>My Notes</h4>
 
             <% if @video.notes(current_user).empty? %>
               <p>You have no notes for this video.</p>
             <% end %>
 
-            <%= render partial: "video_notes" %>
+            <%= render "video_notes" %>
           </section>
           </div>
         </div>

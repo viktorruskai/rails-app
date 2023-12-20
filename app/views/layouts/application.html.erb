@@ -14,7 +14,9 @@
   <body>
     <%= render 'layouts/header' %>
     <div class="container">
-      <%= render 'layouts/flash' %>
+      <turbo-frame id="flash">
+        <%= render 'layouts/flash' %>
+      </turbo-frame>
 
       <%= yield %>
 

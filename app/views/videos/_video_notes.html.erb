@@ -1,8 +1,10 @@
-<ul>
-  <% @video.notes(current_user).each do |note| %>
-    <li class="note"><%= note.note %> <%= link_to "Edit", edit_video_note_path(note) %> | <%= link_to "Delete", note, method: :delete, data: { confirm: "You sure?" } %> </li>
-  <% end %>
-</ul>
+<%= turbo_frame_tag dom_id(@video), loading: "lazy" do %>
+  <ul class="list">
+    <% @video.notes(current_user).each do |note| %>
+      <%= render 'videos/video_note', video_note: note %>
+    <% end %>
+  </ul>
+<% end %>
 
 <%= form_for([@video.notes(current_user).build]) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
@@ -10,7 +12,7 @@
   <%= f.hidden_field :video_id, value: @video.id %>
 
   <div class="field">
-    <%= f.text_area :note, placeholder: "Add a note..." %>
+    <%= f.text_area :note, placeholder: "Type your notes here..." %>
   </div>
   <%= f.submit "Add note", class: "btn btn-primary" %>
 <% end %>

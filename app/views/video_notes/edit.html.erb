@@ -1,27 +1,20 @@
 <% provide(:title, @video_note.video.title) %>
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="row">
-      <%= link_to "back", videos_path %>
+<%= turbo_frame_tag dom_id(@video_note) do %>
+  <span id="t" style="display:none"><%= dom_id(@video_note) %></span>
+  <%= form_for(@video_note, data: { video_note_id: dom_id(@video_note) }) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
 
-      <h3 class="center"><%= @video_note.video.title %></h3>
+    <%= f.hidden_field :video_id, value: @video_note.video.id %>
+
+    <div class="field">
+      <%= f.text_area :note, placeholder: "Edit ..." %>
     </div>
-    <div class="col-md-6">
-      <section class="notes">
-        <h4>Edit note</h4>
 
-        <%= form_for(@video_note) do |f| %>
-          <%= render 'shared/error_messages', object: f.object %>
+    <div class="text-center">
+      <%= f.submit "Update note", class: "btn btn-primary" %>
 
-          <%= f.hidden_field :video_id, value: @video_note.video.id %>
-
-          <div class="field">
-            <%= f.text_area :note, placeholder: "Edit ..." %>
-          </div>
-          <%= f.submit "Update note", class: "btn btn-primary" %>
-        <% end %>
-      </section>
+      <%= link_to "Cancel", video_path(@video_note.video), class: "btn btn-light", style: "text-decoration: underline" %>
     </div>
-  </div>
-</div>
+  <% end %>
+<% end %>

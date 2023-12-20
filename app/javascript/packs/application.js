@@ -15,7 +15,45 @@ ActiveStorage.start()
 
 window.Turbo.setProgressBarDelay(1);
 
+$(document).on('turbo:before-fetch-response', function (event) {
+    let t = $('#t').html();
+
+    notes();
+
+    if (typeof t === 'undefined') {
+        return;
+    }
+
+    let id = event.target.id;
+
+    let element = document.getElementById(id);
+
+    if (element.getAttribute('data-video-note-id') === null) {
+        return;
+    }
+
+    let frame = document.getElementById(element.getAttribute('data-video-note-id'));
+    if (frame.complete) {
+        notes();
+    } else {
+        frame.loaded.then(function () {
+            notes();
+            frame.reload();
+        });
+    }
+});
+
 $(document).on('turbo:load', function () {
+    let $flash = $('#flash');
+
+    if ($flash.is(':visible')) {
+        $flash.delay(5000).fadeOut();
+    }
+
+    notes();
+});
+
+function notes() {
     $('.note').each(function () {
         // Extract time from the text content of the note
         let noteText = $(this).html();
@@ -66,13 +104,13 @@ $(document).on('turbo:load', function () {
         // Convert to seconds and set the current time of the video
         $('#video-player')[0].currentTime = parseInt(hours) * 3600 + parseInt(minutes) * 60 + parseInt(seconds);
     });
+}
 
-    // Function to extract time from note text
-    function extractTime(text) {
-        // Regular expression to match HH:MM:SS format, but HH is optional
-        const regex = /(\d{2}:)?(\d{2}):(\d{2})/;
-        let match = text.match(regex);
+// Function to extract time from note text
+function extractTime(text) {
+    // Regular expression to match HH:MM:SS format, but HH is optional
+    const regex = /(\d{2}:)?(\d{2}):(\d{2})/;
+    let match = text.match(regex);
 
-        return match ? match[0] : '-';
-    }
-});
+    return match ? match[0] : '-';
+}

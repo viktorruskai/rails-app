@@ -6,9 +6,23 @@
   background-color: gold;
 }
 
-turbo-frame {
-  display: block;
-  border: 1px solid blue;
+//turbo-frame {
+//  display: block;
+//  border: 1px solid blue;
+//}
+
+.list {
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+
+.list-item {
+  display: list-item;
+  list-style-type: disc;
+  padding: 10px 5px;
+  margin-left: 1em;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
 }
 
 /* mixins, variables, etc. */

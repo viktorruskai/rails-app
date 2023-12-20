@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
 
+  def render_flash
+    render turbo_stream: turbo_stream.update("flash", partial: "layouts/flash")
+  end
+
   private
 
     # Confirms a logged-in user.
