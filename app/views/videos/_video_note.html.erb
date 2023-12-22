@@ -1,5 +1,9 @@
 <% if video_note != nil %>
+<div data-controller="notes">
   <%= turbo_frame_tag dom_id(video_note) do %>
-    <li class="note list-item"><%= video_note.note %> <%= link_to "Edit", edit_video_note_path(video_note) %> | <%= link_to "Delete", video_note, data: { turbo_confirm: "You sure?", "turbo-method": :delete } %> </li>
+    <li class="note list-item" data-action="notes#item">
+      <%= video_note.note %> <%= link_to "Edit", edit_video_note_path(video_note) %> | <%= link_to "Delete", video_note, data: { turbo_confirm: "You sure?", "turbo-method": :delete } %>
+    </li>
   <% end %>
+</div>
 <% end %>

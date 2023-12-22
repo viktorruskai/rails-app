@@ -1,4 +1,4 @@
-<%= turbo_frame_tag dom_id(@video), loading: "lazy", data: { controller: "notes" } do %>
+<%= turbo_frame_tag dom_id(@video), loading: "lazy" do %>
   <ul class="list">
     <% @video.notes(current_user).each do |note| %>
       <%= render 'videos/video_note', video_note: note %>
