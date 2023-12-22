@@ -3,3 +3,6 @@
 
 //= link_tree ../../javascript .js
 
+//= link bootstrap.min.js
+//= link popper.js
+

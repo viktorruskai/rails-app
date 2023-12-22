@@ -36,7 +36,7 @@ class SessionsController < ApplicationController
       end
     else
       flash.now[:danger] = 'Invalid email/password combination.'
-      render 'new'
+      render 'new', status: :unauthorized
     end
   end
 

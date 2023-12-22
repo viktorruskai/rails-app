@@ -1,5 +1,10 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
+
+
+$gray-light: #999;
+$gray-lighter: #999;
+$gray: #555;
+$gray-darker: #333;
+$state-danger-text: #a94442;
 
 .turbo-progress-bar {
   height: 15px;
@@ -10,6 +15,15 @@
 //  display: block;
 //  border: 1px solid blue;
 //}
+
+nav .navbar-nav li a{
+  color: white !important;
+}
+
+nav .navbar-nav li a:hover {
+  color: $gray-light !important;
+  text-decoration: underline;
+}
 
 .list {
   padding-left: 0;
@@ -45,10 +59,6 @@ $spacer: 10px;
 }
 
 /* universal */
-
-body {
-  padding-top: 60px;
-}
 
 section {
   overflow: auto;
@@ -253,7 +263,7 @@ input {
 }
 
 .field_with_errors {
-  @extend .has-error;
+  //@extend .has-error;
   .form-control {
     color: $state-danger-text;
   }

@@ -1,9 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  connect() {
-    console.log(this.element.textContent.trim());
 
+  static targets = ["link"];
+  connect() {
     this.parseNote(this.element.textContent.trim());
   }
 
@@ -15,7 +15,7 @@ export default class extends Controller {
 
     }
 
-    let link = '<a class="video-link" href="#" data-time="' + time + '">' + time + '</a>';
+    let link = '<a data-notes-target="link" data-action="click->notes#handleClick" href="#" data-time="' + time + '">' + time + '</a>';
 
     this.element.innerHTML = this.element.innerHTML.replace(time, link);
   }
@@ -27,5 +27,28 @@ export default class extends Controller {
     }
 
     return time[0];
+  }
+
+  handleClick(event) {
+    event.preventDefault();
+
+    let hours, minutes, seconds;
+    let time = this.linkTarget.dataset.time;
+    let parts = time.split(':');
+
+    if (parts.length === 2) {
+      hours = 0;
+      minutes = parts[0];
+      seconds = parts[1];
+    } else if (parts.length === 3) {
+      hours = parts[0];
+      minutes = parts[1];
+      seconds = parts[2];
+    } else {
+      return;
+    }
+
+    let videoPlayer = document.getElementById('video-player');
+    videoPlayer.currentTime = parseInt(hours) * 3600 + parseInt(minutes) * 60 + parseInt(seconds);
   }
 }

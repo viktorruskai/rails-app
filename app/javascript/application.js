@@ -1,13 +1,16 @@
 
+import $ from "jquery";
+// import "popper"
+import "bootstrap"
+
 import "./controllers"
 
 import "@hotwired/turbo-rails"
 import * as ActiveStorage from "@rails/activestorage"
-import $ from "jquery";
-// import "bootstrap"
 
+var jQuery = $;
 
-ActiveStorage.start()
+ActiveStorage.start();
 
 window.Turbo.setProgressBarDelay(1);
 
@@ -39,36 +42,36 @@ window.Turbo.setProgressBarDelay(1);
 //     }
 // });
 
-$(document).on('turbo:load', function () {
+// $(document).on('turbo:load', function () {
     // notes();
 
     // Handle click event on the generated links
-    $('.video-link').on('click', function (e) {
-        let hours, minutes, seconds;
-
-        e.preventDefault();
-        // Get the time from the data-time attribute of the clicked link
-        let time = $(this).data('time');
-        // Split the time into parts
-        let parts = time.split(':');
-
-        // If the time is in MM:SS format, add 0 hours
-        if (parts.length === 2) {
-            hours = 0;
-            minutes = parts[0];
-            seconds = parts[1];
-        } else if (parts.length === 3) {
-            hours = parts[0];
-            minutes = parts[1];
-            seconds = parts[2];
-        } else {
-            return;
-        }
-
-        // Convert to seconds and set the current time of the video
-        $('#video-player')[0].currentTime = parseInt(hours) * 3600 + parseInt(minutes) * 60 + parseInt(seconds);
-    });
-});
+    // $('.video-link').on('click', function (e) {
+    //     let hours, minutes, seconds;
+    //
+    //     e.preventDefault();
+    //     // Get the time from the data-time attribute of the clicked link
+    //     let time = $(this).data('time');
+    //     // Split the time into parts
+    //     let parts = time.split(':');
+    //
+    //     // If the time is in MM:SS format, add 0 hours
+    //     if (parts.length === 2) {
+    //         hours = 0;
+    //         minutes = parts[0];
+    //         seconds = parts[1];
+    //     } else if (parts.length === 3) {
+    //         hours = parts[0];
+    //         minutes = parts[1];
+    //         seconds = parts[2];
+    //     } else {
+    //         return;
+    //     }
+    //
+    //     // Convert to seconds and set the current time of the video
+    //     $('#video-player')[0].currentTime = parseInt(hours) * 3600 + parseInt(minutes) * 60 + parseInt(seconds);
+    // });
+// });
 
 // function notes() {
 //     $('.note').each(function () {
