@@ -12,7 +12,6 @@ export default class extends Controller {
 
     if (time === '-') {
       return;
-
     }
 
     let link = '<a data-notes-target="link" data-action="click->notes#handleClick" href="#" data-time="' + time + '">' + time + '</a>';

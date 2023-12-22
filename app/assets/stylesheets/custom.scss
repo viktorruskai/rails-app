@@ -25,6 +25,10 @@ nav .navbar-nav li a:hover {
   text-decoration: underline;
 }
 
+.navbar-collapse.in {
+  display: block !important;
+}
+
 .list {
   padding-left: 0;
   margin-bottom: 20px;
