@@ -1,16 +1,12 @@
-// This file is automatically compiled by Webpack, along with any other files
-// present in this directory. You're encouraged to place your actual application logic in
-// a relevant structure within app/javascript and only use these pack files to reference
-// that code so it'll be compiled.
 
-import Rails from "@rails/ujs"
+import "./controllers"
+
 import "@hotwired/turbo-rails"
 import * as ActiveStorage from "@rails/activestorage"
-import "channels"
-import "jquery"
-import "bootstrap"
+import $ from "jquery";
+// import "bootstrap"
 
-Rails.start()
+
 ActiveStorage.start()
 
 window.Turbo.setProgressBarDelay(1);
@@ -44,12 +40,6 @@ $(document).on('turbo:before-fetch-response', function (event) {
 });
 
 $(document).on('turbo:load', function () {
-    let $flash = $('#flash');
-
-    if ($flash.is(':visible')) {
-        $flash.delay(5000).fadeOut();
-    }
-
     notes();
 });
 

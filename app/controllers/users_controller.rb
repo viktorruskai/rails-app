@@ -63,7 +63,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email
-      flash[:info] = "Please check your email to activate your account."
+      flash.now[:info] = "Please check your email to activate your account."
       redirect_to root_url
     else
       render "new"
@@ -82,7 +82,7 @@ class UsersController < ApplicationController
     if @user.save
       @user.send_activation_email
       @user.update_attribute(:admin, true)
-      flash[:info] = "Please check your email to activate your account."
+      flash.now[:info] = "Please check your email to activate your account."
       redirect_to users_url
     else
       render "new_teacher"
@@ -122,7 +122,7 @@ class UsersController < ApplicationController
   # - `id` - The id of the user to delete.
   def destroy
     User.find(params[:id]).destroy
-    flash[:success] = "User deleted"
+    flash.now[:success] = "User deleted"
     redirect_to users_url
   end
 

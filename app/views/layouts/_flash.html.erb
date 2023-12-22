@@ -1,3 +1,5 @@
 <% flash.each do |message_type, message| %>
-  <div class="alert alert-<%= message_type == "error" ? "danger" : message_type %>"><%= message %></div>
+  <div data-controller="flash" class="alert alert-<%= message_type == "error" ? "danger" : message_type %>">
+    <%= message %>
+  </div>
 <% end %>

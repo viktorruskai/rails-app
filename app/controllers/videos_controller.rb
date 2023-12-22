@@ -57,7 +57,7 @@ class VideosController < ApplicationController
     @video = current_user.videos.build(video_params)
     @video.video.attach(params[:video][:video])
     if @video.save
-      flash[:success] = "Video was successfully uploaded."
+      flash.now[:success] = "Video was successfully uploaded."
       redirect_to root_url
     else
       @feed_items = current_user.feed.paginate(page: params[:page])
@@ -76,7 +76,7 @@ class VideosController < ApplicationController
   def update
     @video = Video.find(params[:id])
     if @video.update(edit_video_params)
-      flash[:success] = "Video was successfully updated."
+      flash.now[:success] = "Video was successfully updated."
       redirect_to @video
     else
       render 'edit'
@@ -90,7 +90,7 @@ class VideosController < ApplicationController
   # - `id` - The id of the video to delete.
   def destroy
     @video.destroy
-    flash[:success] = "Video was successfully deleted."
+    flash.now[:success] = "Video was successfully deleted."
     redirect_to request.referrer || root_url
   end
 

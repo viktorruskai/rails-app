@@ -28,12 +28,17 @@ class VideoNotesController < ApplicationController
     @video_note.user = current_user
 
     if @video_note.save
-      flash[:success] = "Note was successfully added."
+      flash.now[:success] = "Note was successfully added."
     else
-      flash[:error] = "Note was not successfully added."
+      flash.now[:error] = "Note was not successfully added."
     end
 
-    redirect_to @video
+     streams = [
+       turbo_stream.update("flash", partial: "layouts/flash"),
+       turbo_stream.replace(@video, partial: "videos/video_notes", locals: { video: @video }),
+     ]
+
+     render turbo_stream: streams
   end
 
   # Edit a video note.
@@ -75,7 +80,7 @@ class VideoNotesController < ApplicationController
     video = @video_note.video
 
     @video_note.destroy
-    flash[:success] = "Note was successfully deleted."
+    flash.now[:success] = "Note was successfully deleted."
 
     streams = [
       turbo_stream.update("flash", partial: "layouts/flash"),
@@ -83,8 +88,6 @@ class VideoNotesController < ApplicationController
     ]
 
     render turbo_stream: streams
-
-#     redirect_to video
   end
 
   private
