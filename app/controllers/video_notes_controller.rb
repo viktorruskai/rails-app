@@ -35,7 +35,8 @@ class VideoNotesController < ApplicationController
 
      streams = [
        turbo_stream.update("flash", partial: "layouts/flash"),
-       turbo_stream.replace(@video, partial: "videos/video_notes", locals: { video: @video }),
+       turbo_stream.replace(helpers.dom_id(@video), partial: "videos/video_notes", locals: { video: @video }),
+#        turbo_stream.append(@video_note, partial: "videos/video_note", locals: { video_note: @video_note }),
      ]
 
      render turbo_stream: streams

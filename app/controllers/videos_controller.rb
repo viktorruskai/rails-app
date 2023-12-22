@@ -58,10 +58,9 @@ class VideosController < ApplicationController
     @video.video.attach(params[:video][:video])
     if @video.save
       flash.now[:success] = "Video was successfully uploaded."
-      redirect_to root_url
+      redirect_to videos_url
     else
-      @feed_items = current_user.feed.paginate(page: params[:page])
-      render 'static_pages/home'
+      render :new, status: :unprocessable_entity, content_type: "text/html"
     end
   end
 
@@ -79,7 +78,7 @@ class VideosController < ApplicationController
       flash.now[:success] = "Video was successfully updated."
       redirect_to @video
     else
-      render 'edit'
+      render "edit", status: :unprocessable_entity, content_type: "text/html"
     end
   end
 
@@ -91,7 +90,7 @@ class VideosController < ApplicationController
   def destroy
     @video.destroy
     flash.now[:success] = "Video was successfully deleted."
-    redirect_to request.referrer || root_url
+    redirect_to videos_path
   end
 
   private

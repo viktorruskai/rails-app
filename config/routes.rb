@@ -17,3 +17,5 @@ Rails.application.routes.draw do
   resources :videos, only: [:index, :edit, :update, :new, :show, :create, :destroy]
   resources :video_notes, only: [:create, :edit, :update, :destroy]
 end
+
+Rails.application.routes.default_url_options[:host] = '127.0.0.1:3000'

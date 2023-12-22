@@ -14,7 +14,7 @@
     <div class="text-center">
       <%= f.submit "Update note", class: "btn btn-primary" %>
 
-      <%= link_to "Cancel", video_path(@video_note.video), class: "btn btn-light", style: "text-decoration: underline" %>
+      <%= link_to "Cancel", video_path(@video_note.video), class: "btn btn-light", style: "text-decoration: underline", data: { turbo: true } %>
     </div>
   <% end %>
 <% end %>

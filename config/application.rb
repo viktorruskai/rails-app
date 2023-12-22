@@ -12,6 +12,8 @@ module App
 #     config.load_defaults 6.0
     config.load_defaults 7.0
 
+    config.default_url_options = config.action_mailer.default_url_options
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

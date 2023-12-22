@@ -9,7 +9,7 @@
         Posted <%= time_ago_in_words(@video.created_at) %> ago by <span class="text-decoration-underline"><%= @video.user.name %></span>.
 
         <% if current_user?(@video.user) %>
-          <%= link_to "Edit", edit_video_path(@video) %> | <%= link_to "Delete", @video, method: :delete, data: { confirm: "You sure?" } %>
+          <%= link_to "Edit", edit_video_path(@video) %> | <%= link_to "Delete", @video, data: { turbo_confirm: "You sure?", "turbo-method": :delete } %>
         <% end %>
       </div>
     </header>

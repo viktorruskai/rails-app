@@ -27,7 +27,7 @@ class Video < ApplicationRecord
   default_scope -> { order(created_at: :desc) }
 
   validates :user_id, presence: true
-  validates :title, presence: true, length: { maximum: 100 }
+  validates :title, presence: true, length: { minimum: 2, maximum: 100 }
   validates :content, presence: true, length: { maximum: 240 }
   validates :video, content_type: { in: %w[video/mp4 video/quicktime], message: "must be a valid video format" },
                     presence: true,
