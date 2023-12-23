@@ -1,14 +1,18 @@
 <% provide(:title, 'Edit video') %>
-<h1>Edit video</h1>
 
-<%= form_with(model: @video, local: true) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-  <div class="field">
-      <%= f.text_field :title, placeholder: "Title" %>
+<div class="row mt-2">
+  <h1>Edit video</h1>
+
+  <%= form_with(model: @video, local: true) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <div class="form-group mb-2">
+        <%= f.text_field :title, placeholder: "Title", class: "form-control" %>
+      </div>
+    <div class="form-group mb-2">
+      <%= f.text_area :content, placeholder: "Description", class: "form-control" %>
     </div>
-  <div class="field">
-    <%= f.text_area :content, placeholder: "Description" %>
-  </div>
-  <%= f.submit "Save", class: "btn btn-primary" %>
-<% end %>
+
+    <%= f.submit "Save", class: "btn btn-primary" %>
+  <% end %>
+</div>
 

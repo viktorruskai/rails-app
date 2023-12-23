@@ -1,11 +1,11 @@
 <% provide(:title, @video.title) %>
 
-<div class="row">
+<div class="row mt-2">
   <article>
-    <header class="mb-4">
+    <header class="mb-2">
       <h1 class="text-bold mb-1"><%= @video.title %></h1>
 
-      <div class="text-muted mb-5">
+      <div class="text-muted mb-4">
         Posted <%= time_ago_in_words(@video.created_at) %> ago by <span class="text-decoration-underline"><%= @video.user.name %></span>.
 
         <% if current_user?(@video.user) %>
@@ -17,9 +17,11 @@
     <figure class="mb-4">
       <div class="row">
         <div class="col-lg-8">
-          <section class="videos">
+          <section class="videos mb-4">
             <% if @video.video.attached? %>
-              <%= video_tag url_for(@video.video), width: "720", controls: true, id: "video-player" %>
+              <div class="ratio ratio-16x9">
+                <%= video_tag url_for(@video.video), width: 720, controls: true, id: "video-player" %>
+              </div>
             <% end %>
           </section>
         </div>

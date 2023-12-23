@@ -1,23 +1,27 @@
 <% if logged_in? %>
-  <div class="row">
-    <div class="col-md-8">
-      <h3>Hi <%= current_user.name %>, </h3>
-      <p>
+  <div class="row mt-2">
+    <div class="center jumbotron">
+      <h1 class="display-4">Hi <span class="text-decoration-underline"><%= current_user.name %></span>, </h1>
+
+      <p class="lead text-small">
         go to the <%= link_to "videos", videos_path %> page to view all videos.
       </p>
-    </div>
   </div>
 <% else %>
-  <div class="center jumbotron">
-    <h1>Welcome to the e-learning platform.</h1>
+  <div class="row mt-2">
+    <div class="center jumbotron">
+      <h1 class="display-4">Welcome to the e-learning platform.</h1>
 
-    <h2>
-      This is the home page for the sample application.
-    </h2>
+      <p class="lead">
+        This is the home page for the sample application.
+      </p>
 
-    <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+      <hr class="my-4">
+
+      <p class="lead">
+        <%= link_to "Log in", login_path, class: "btn btn-lg btn-light" %>
+        <%= link_to "Register", signup_path, class: "btn btn-lg btn-light" %>
+      </div>
+    </div>
   </div>
-
-  <%= link_to image_tag("rails.svg", alt: "Rails logo", width: "200"),
-                        "https://rubyonrails.org/" %>
 <% end %>

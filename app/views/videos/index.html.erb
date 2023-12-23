@@ -1,14 +1,19 @@
 <% provide(:title, 'All videos') %>
-<h1>All videos</h1>
 
-<% if current_user.admin? %>
-  <%= link_to "Add new video", new_video_path %>
-<% end %>
+<div class="row mt-2">
+  <h1>All videos</h1>
 
-<%= will_paginate %>
+  <div class="col mb-2">
+    <% if current_user.admin? %>
+      <%= link_to "Add new video", new_video_path %>
+    <% end %>
+  </div>
 
-<ul class="users">
-  <%= render @videos %>
-</ul>
+  <%= will_paginate %>
 
-<%= will_paginate %>
+  <ul class="users">
+    <%= render @videos %>
+  </ul>
+
+  <%= will_paginate %>
+</div>

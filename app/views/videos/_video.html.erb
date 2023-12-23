@@ -1,12 +1,14 @@
-<li class="card mb-4" id="video-<%= video.id %>">
+<li class="card mb-3" id="video-<%= video.id %>">
     <a href="<%= video_path(video) %>">
       <% if video.video.attached? %>
-        <%= video_tag url_for(video.video), size: "700x335", controls: false %>
+        <div class="ratio ratio-16x9">
+          <%= video_tag url_for(video.video), size: "700x335", controls: false %>
+        </div>
       <% end %>
     </a>
     <div class="card-body">
-        <div class="small text-muted">Posted <%= time_ago_in_words(video.created_at) %> ago by <%= video.user.name %>.</div>
-        <h4 class="card-title h4"><%= video.title %></h4>
+        <div class="small text-muted mb-1">Posted <%= time_ago_in_words(video.created_at) %> ago by <%= video.user.name %>.</div>
+        <h4 class="card-title h4 mb-1"><%= video.title %></h4>
         <p class="card-text"><%= video.content.truncate(100) %></p>
         <a class="btn btn-primary" href="<%= video_path(video) %>">See more →</a>
     </div>

@@ -1,19 +1,26 @@
 <% provide(:title, 'Add a new video') %>
-<h1>New video</h1>
 
-<%= form_for @video do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-  <div class="field">
-      <%= f.text_field :title, placeholder: "Title" %>
+<div class="row mt-2">
+  <h1>New video</h1>
+
+  <%= form_for @video do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <div class="form-group mb-2">
+        <%= f.text_field :title, placeholder: "Title", class: "form-control" %>
+      </div>
+    <div class="form-group mb-2">
+      <%= f.text_area :content, placeholder: "Description", class: "form-control" %>
     </div>
-  <div class="field">
-    <%= f.text_area :content, placeholder: "Description" %>
-  </div>
-  <span class="video">
-      <%= f.file_field :video,  accept: "video/mp4,video/quicktime" %>
-    </span>
-  <%= f.submit "Add", class: "btn btn-primary" %>
-<% end %>
+
+    <div class="form-group mb-2">
+      <span class="video">
+        <%= f.file_field :video,  accept: "video/mp4,video/quicktime", class: "form-control" %>
+      </span>
+    </div>
+    
+    <%= f.submit "Add", class: "btn btn-primary" %>
+  <% end %>
+</div>
 
 <script type="text/javascript">
   $("#video_video").bind("change", function() {
