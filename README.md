@@ -6,12 +6,12 @@ Migrate the database:
 
 ```
 $ rails db:migrate
-```
-
-If the test suite passes, you’ll be ready to seed the database with sample users and run the app in a local server:
-
-```
 $ rails db:seed
+```
+
+Start the server:
+
+```
 $ rails server
 ```
 
